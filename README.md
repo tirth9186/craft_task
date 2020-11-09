@@ -3,10 +3,10 @@ Mule application created to transform data in particular form.
 ```
 Introduction
   -> In this mule application two mule flows have been created for two different usecases. 
-  -> To listen for events HTTP listener is being used, two **REST endpoints** are created.
-  -> The REST endpoints are as follows: **i) /task/usecase1, ii) /task/usecase2.**
-  -> Both of the endpoints are accepting only **POST** requests.
-  -> The application is being hosted in localhost on the **port 8081.**
+  -> To listen for events HTTP listener is being used, two REST endpoints are created.
+  -> The REST endpoints are as follows: i) /task/usecase1, ii) /task/usecase2.
+  -> Both of the endpoints are accepting only POST requests.
+  -> The application is being hosted in localhost on the port 8081.
 
 
 Usecase 1:
