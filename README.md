@@ -1,6 +1,6 @@
 # craft_task
 Mule application created to transform data in particular form.
-```
+
 ##Introduction
   -> In this mule application two mule flows have been created for two different usecases. 
   -> To listen for events HTTP listener is being used, two **REST endpoints** are created.
@@ -42,4 +42,4 @@ Mule application created to transform data in particular form.
 google:101|Ted1*104|Ted4*108|Ted8~
 microsoft:102|Ted2*107|Ted7~
 craft:103|Ted3*105|Ted5~
-ibm:106|Ted6~```
+ibm:106|Ted6~
