@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a033fbb0-09d0-43fd-b75f-ddf0885af551" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="craft_task_usecase1" doc:id="f4e580fd-bef7-4154-a61a-2bf747b85a89" >
+		<http:listener doc:name="Listener" doc:id="32629511-2bf1-4a47-a324-840f7337722c" config-ref="HTTP_Listener_config" path="/task/usecase1" allowedMethods="POST"/>
+		<ee:transform doc:name="Transform Message" doc:id="3c087bba-a10e-44b0-af3f-cfa5ea9924b4" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+import countBy from dw::core::Arrays
+import divideBy from dw::core::Objects
+output application/json
+---
+{
+	result: payload groupBy $.company mapObject((eGroup,company)->{
+		"company":company,
+		"no_employees": sizeOf(eGroup)
+	})  divideBy 2,
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="23dc4280-cbe3-4558-b67e-c78af6fe6614" message="#[payload]"/>
+	</flow>
+	<flow name="craft_task_usecase2" doc:id="7b3a1e56-054f-4ecb-a67c-c4c72ba112f8" >
+		<http:listener doc:name="Listener" doc:id="9e4ad97b-dc1b-4354-aa58-68ddecd362e6" config-ref="HTTP_Listener_config" path="task/usecase2" allowedMethods="POST" />
+		<ee:transform doc:name="Transform Message" doc:id="e0b80f42-36ce-4e65-8bf6-28dc0113f864" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+import countBy from dw::core::Arrays
+import divideBy from dw::core::Objects
+
+
+output text/yaml
+---
+{
+	 result: payload groupBy $.company mapObject((eGroup,company)->{
+		(company): (eGroup map(val,id)->((val.id ++ "|" ++ val.name))) joinBy "*" ++ "~" 
+	})
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="6f443d59-de3b-417e-bbc6-643f8dba1a6d" message="#[payload]" />
+	</flow>
+</mule>
