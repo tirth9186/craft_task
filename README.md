@@ -1,7 +1,7 @@
 # craft_task
 Mule application created to transform data in particular form.
-
-##Introduction
+```
+Introduction
   -> In this mule application two mule flows have been created for two different usecases. 
   -> To listen for events HTTP listener is being used, two **REST endpoints** are created.
   -> The REST endpoints are as follows: **i) /task/usecase1, ii) /task/usecase2.**
@@ -9,8 +9,8 @@ Mule application created to transform data in particular form.
   -> The application is being hosted in localhost on the **port 8081.**
 
 
-##Usecase 1:
-###sample input:
+Usecase 1:
+sample input:
 [{"id":"101","name":"Ted1","company":"google"},
  {"id":"102","name":"Ted2","company":"microsoft"}, 
  {"id":"103","name":"Ted3","company":"craft"},
@@ -20,15 +20,15 @@ Mule application created to transform data in particular form.
  {"id":"107","name":"Ted7","company":"microsoft"},
  {"id":"108","name":"Ted8","company":"google"}
 ]
-###sample output:
+sample output:
 [{"company":"google","no_employees":"3"},
 {"company":"craft","no_employees":"2"},
 {"company":"microsoft","no_employees":"2"},
 {"company":"ibm","no_employees":"1"}]
 
 
-##UseCase 2:
-###sample input:
+UseCase 2:
+sample input:
 [{"id":"101","name":"Ted1","company":"google"},
  {"id":"102","name":"Ted2","company":"microsoft"},
  {"id":"103","name":"Ted3","company":"craft"}, 
@@ -38,8 +38,8 @@ Mule application created to transform data in particular form.
 {"id":"107","name":"Ted7","company":"microsoft"},
 {"id":"108","name":"Ted8","company":"google"},
 ]
-###sample output:
+sample output:
 google:101|Ted1*104|Ted4*108|Ted8~
 microsoft:102|Ted2*107|Ted7~
 craft:103|Ted3*105|Ted5~
-ibm:106|Ted6~
+ibm:106|Ted6~```
